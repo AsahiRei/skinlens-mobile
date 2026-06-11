@@ -103,7 +103,7 @@ x = tf.keras.layers.GlobalAveragePooling2D()(x)
 x = tf.keras.layers.Dropout(0.2)(x)
 x = tf.keras.layers.Dense(256, activation="relu")(x)
 x = tf.keras.layers.Dropout(0.1)(x)
-outputs = tf.keras.layers.Dense(3, activation="softmax")(x)
+outputs = tf.keras.layers.Dense(5, activation="softmax")(x)
 model = tf.keras.models.Model(inputs, outputs)
 
 #focal loss

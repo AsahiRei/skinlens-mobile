@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Constants
 IMG_SIZE = (224, 224)
-CLASS_NAMES = ["acne", "eczema"]
+CLASS_NAMES = ["acne", "dry", "eczema", "normal", "oily"]
 
 # Get model path
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
