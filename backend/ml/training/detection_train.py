@@ -1,6 +1,8 @@
 #created by Arn Christian S. Rosales
 #skin lens detection model
 #05-01-2026
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import tensorflow as tf
 import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
@@ -11,13 +13,17 @@ img_size = (224, 224)
 batch_size = 32
 seed = 42
 
+# Get absolute paths relative to script location
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(script_dir)  # Go up to ml/ directory
+
 #dataset directory
-train_dir = "backend/datasets/detection/train"
-val_dir = "backend/datasets/detection/valid"
-test_dir = "backend/datasets/detection/test"
+train_dir = os.path.join(parent_dir, "dataset", "detection", "train")
+val_dir = os.path.join(parent_dir, "dataset", "detection", "valid")
+test_dir = os.path.join(parent_dir, "dataset", "detection", "test")
 
 #model path
-model_path = "backend/models/detection/skinlens_detection.keras"
+model_path = os.path.join(parent_dir, "models", "detection", "skinlens_detection.keras")
 
 #load dataset
 train_ds = tf.keras.utils.image_dataset_from_directory(
@@ -97,7 +103,7 @@ x = tf.keras.layers.GlobalAveragePooling2D()(x)
 x = tf.keras.layers.Dropout(0.2)(x)
 x = tf.keras.layers.Dense(256, activation="relu")(x)
 x = tf.keras.layers.Dropout(0.1)(x)
-outputs = tf.keras.layers.Dense(5, activation="softmax")(x)
+outputs = tf.keras.layers.Dense(3, activation="softmax")(x)
 model = tf.keras.models.Model(inputs, outputs)
 
 #focal loss

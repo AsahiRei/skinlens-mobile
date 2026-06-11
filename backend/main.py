@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.addition import router as addition_router
-from api.multiply import router as multiply_router
+from api.detection import router as detection_router
 
 app = FastAPI(title="SkinLens API", version="1.0.0")
 
@@ -13,8 +12,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(addition_router)
-app.include_router(multiply_router)
+app.include_router(detection_router)
 
 @app.get("/")
 async def root():

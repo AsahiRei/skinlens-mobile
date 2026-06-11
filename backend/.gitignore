@@ -2,6 +2,7 @@
 .venv/
 venv/
 env/
+dataset/
 
 # Python cache
 __pycache__/
